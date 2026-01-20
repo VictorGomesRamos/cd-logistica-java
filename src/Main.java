@@ -1,19 +1,16 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import model.Produto;
+
 public class Main {
     public static void main(String[] args) {
 
-        Produto produto1 = new Produto();
-        produto1.nome = "Teclado";
-        produto1.quantidadeemEstoque = 10;
+        Produto produto1 = new Produto("Teclado",10);
 
-        produto1.exibirProduto();
+        System.out.println("Produto " + produto1.getNome());
+        System.out.println("Estoque inicial: " + produto1.getQuantidadeEmEstoque());
 
         produto1.entradaEstoque(5);
-        produto1.saidaestoque(3);
+        produto1.saidaEstoque(3);
 
-        produto1.exibirProduto();
-
-        System.out.println(produto1.nome);
+        System.out.println("Estoque final: " + produto1.getQuantidadeEmEstoque());
     }
 }
