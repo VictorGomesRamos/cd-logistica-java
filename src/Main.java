@@ -8,8 +8,8 @@ public class Main {
         System.out.println("Produto " + produto1.getNome());
         System.out.println("Estoque inicial: " + produto1.getQuantidadeEmEstoque());
 
-        produto1.entradaEstoque(5);
-        produto1.saidaEstoque(3);
+        produto1.entradaEstoque(100);
+        produto1.saidaEstoque(-3);
 
         System.out.println("Estoque final: " + produto1.getQuantidadeEmEstoque());
     }

@@ -8,6 +8,12 @@ public class Produto {
     public Produto(String nome, int quantidadeInicial){
         this.nome = nome;
         this.quantidadeEmEstoque = quantidadeInicial;
+
+        if(quantidadeInicial < 0){
+            this.quantidadeEmEstoque = 0;
+        } else{
+            this.quantidadeEmEstoque = quantidadeInicial;
+        }
     }
 
     public String getNome() {
@@ -19,16 +25,25 @@ public class Produto {
     }
     
     public void entradaEstoque(int quantidade){
-        if (quantidade > 0){
-            quantidadeEmEstoque += quantidade;
+        if (quantidade <= 0) {
+            System.out.println("Quantidade inválida para entrada");
+            return;
         }
-    }
+                quantidadeEmEstoque += quantidade;
+            }
 
-    public boolean saidaEstoque(int quantidade){
-        if (quantidade > 0 && quantidade <= quantidadeEmEstoque){
-            quantidadeEmEstoque -= quantidade;
-            return true;
+
+    public void saidaEstoque(int quantidade){
+        if (quantidade <=0 ) {
+            System.out.println("Quantidade inválida para a saída");
+            return;
         }
-        return false;
+
+        if (quantidade > quantidadeEmEstoque) {
+            System.out.println("Estoque insuficiente");
+            return;
+        }
+            quantidadeEmEstoque -= quantidade;
+
     }
 }
