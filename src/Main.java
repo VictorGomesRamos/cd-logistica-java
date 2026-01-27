@@ -1,16 +1,18 @@
+import model.Estoque;
 import model.Produto;
 
 public class Main {
     public static void main(String[] args) {
 
-        Produto produto1 = new Produto("Teclado",10);
+        Estoque estoque = new Estoque();
 
-        System.out.println("Produto " + produto1.getNome());
-        System.out.println("Estoque inicial: " + produto1.getQuantidadeEmEstoque());
+        estoque.adicionarProduto(new Produto("Teclado", 10));
+        estoque.adicionarProduto(new Produto("Mouse", 20));
 
-        produto1.entradaEstoque(100);
-        produto1.saidaEstoque(-3);
+        estoque.entradaEstoque("Teclado", 5);
+        estoque.saidaEstoque("Mouse", 30); // inválida
+        estoque.saidaEstoque("Mouse", 5);  // válida
 
-        System.out.println("Estoque final: " + produto1.getQuantidadeEmEstoque());
+        estoque.listarProdutos();
     }
 }
