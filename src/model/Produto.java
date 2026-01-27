@@ -2,49 +2,21 @@ package model;
 
 public class Produto {
 
-    // 1️⃣ ATRIBUTOS
     private String nome;
     private int quantidadeEmEstoque;
 
-    // 2️⃣ CONSTRUTOR
-    public Produto(String nome, int quantidadeInicial) {
+    public Produto(String nome, int quantidadeEmEstoque) {
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Nome do produto inválido");
+        }
+        if (quantidadeEmEstoque < 0) {
+            throw new IllegalArgumentException("Estoque inicial não pode ser negativo");
+        }
+
         this.nome = nome;
-
-        if (quantidadeInicial < 0) {
-            this.quantidadeEmEstoque = 0;
-        } else {
-            this.quantidadeEmEstoque = quantidadeInicial;
-        }
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
     }
 
-    // 3️⃣ MÉTODOS DE NEGÓCIO
-    public void entradaEstoque(int quantidade) {
-        if (quantidade <= 0) {
-            System.out.println("Quantidade inválida para entrada.");
-            return;
-        }
-        quantidadeEmEstoque += quantidade;
-    }
-
-    public void saidaEstoque(int quantidade) {
-        if (quantidade <= 0) {
-            System.out.println("Quantidade inválida para a saída.");
-            return;
-        }
-        if (quantidade > quantidadeEmEstoque) {
-            System.out.println("Estoque insuficiente.");
-            return;
-        }
-        quantidadeEmEstoque -= quantidade;
-    }
-
-    // 4️⃣ MÉTODO DE EXIBIÇÃO (AQUI 👇)
-    public void exibirProduto() {
-        System.out.println("Produto: " + nome);
-        System.out.println("Quantidade em estoque: " + quantidadeEmEstoque);
-    }
-
-    // 5️⃣ GETTERS
     public String getNome() {
         return nome;
     }
@@ -52,5 +24,28 @@ public class Produto {
     public int getQuantidadeEmEstoque() {
         return quantidadeEmEstoque;
     }
-}
 
+    public void entradaEstoque(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade para entrada deve ser positiva");
+        }
+        quantidadeEmEstoque += quantidade;
+    }
+
+    public void saidaEstoque(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade inválida para saída");
+        }
+
+        if (quantidade > quantidadeEmEstoque) {
+            throw new IllegalArgumentException("Estoque insuficiente");
+        }
+
+        quantidadeEmEstoque -= quantidade;
+    }
+
+    public void exibirProduto() {
+        System.out.println("Produto: " + nome);
+        System.out.println("Estoque: " + quantidadeEmEstoque);
+    }
+}
