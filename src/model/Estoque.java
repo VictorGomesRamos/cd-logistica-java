@@ -5,52 +5,39 @@ import java.util.List;
 
 public class Estoque {
 
-    private List<Produto> produtos;
-
-    public Estoque() {
-        this.produtos = new ArrayList<>();
-    }
+    private List<Produto> produtos = new ArrayList<>();
 
     public void adicionarProduto(Produto produto) {
         produtos.add(produto);
     }
 
-    public Produto buscarProdutoPorNome(String nome) {
-        for (Produto p : produtos) {
-            if (p.getNome().equalsIgnoreCase(nome)) {
-                return p;
-            }
-        }
-        return null;
-    }
-
-    public void entradaEstoque(String nomeProduto, int quantidade) {
-        Produto produto = buscarProdutoPorNome(nomeProduto);
-
-        if (produto == null) {
-            System.out.println("Produto não encontrado.");
-            return;
-        }
-
+    public void entradaEstoque(String nome, int quantidade) {
+        Produto produto = buscarProduto(nome);
         produto.entradaEstoque(quantidade);
     }
 
-    public void saidaEstoque(String nomeProduto, int quantidade) {
-        Produto produto = buscarProdutoPorNome(nomeProduto);
-
-        if (produto == null) {
-            System.out.println("Produto não encontrado.");
-            return;
-        }
-
+    public void saidaEstoque(String nome, int quantidade) {
+        Produto produto = buscarProduto(nome);
         produto.saidaEstoque(quantidade);
     }
 
     public void listarProdutos() {
-        for (Produto p : produtos) {
-            p.exibirProduto();
-            System.out.println("---------------");
+        if (produtos.isEmpty()) {
+            System.out.println("Estoque vazio.");
+            return;
+        }
+
+        for (Produto produto : produtos) {
+            produto.exibirProduto();
         }
     }
-}
 
+    private Produto buscarProduto(String nome) {
+        for (Produto produto : produtos) {
+            if (produto.getNome().equalsIgnoreCase(nome)) {
+                return produto;
+            }
+        }
+        throw new RuntimeException("Produto não encontrado.");
+    }
+}
