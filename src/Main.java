@@ -1,5 +1,4 @@
-import model.Estoque;
-import model.Produto;
+import service.EstoqueService;
 
 import java.util.Scanner;
 
@@ -7,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Estoque estoque = new Estoque();
+        EstoqueService estoqueService = new EstoqueService();
 
         int opcao;
 
@@ -23,45 +22,47 @@ public class Main {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {
-                case 1 -> {
-                    System.out.print("Nome do produto: ");
-                    String nome = scanner.nextLine();
+            try {
+                switch (opcao) {
+                    case 1 -> {
+                        System.out.print("Nome do produto: ");
+                        String nome = scanner.nextLine();
 
-                    System.out.print("Quantidade inicial: ");
-                    int quantidade = scanner.nextInt();
+                        System.out.print("Quantidade inicial: ");
+                        int quantidade = scanner.nextInt();
 
-                    Produto produto = new Produto(nome, quantidade);
-                    estoque.adicionarProduto(produto);
+                        estoqueService.cadastrarProduto(nome, quantidade);
+                        System.out.println("Produto cadastrado com sucesso!");
+                    }
 
-                    System.out.println("Produto cadastrado com sucesso!");
+                    case 2 -> {
+                        System.out.print("Nome do produto: ");
+                        String nome = scanner.nextLine();
+
+                        System.out.print("Quantidade de entrada: ");
+                        int quantidade = scanner.nextInt();
+
+                        estoqueService.entradaEstoque(nome, quantidade);
+                    }
+
+                    case 3 -> {
+                        System.out.print("Nome do produto: ");
+                        String nome = scanner.nextLine();
+
+                        System.out.print("Quantidade de saída: ");
+                        int quantidade = scanner.nextInt();
+
+                        estoqueService.saidaEstoque(nome, quantidade);
+                    }
+
+                    case 4 -> estoqueService.listarProdutos();
+
+                    case 0 -> System.out.println("Encerrando sistema...");
+
+                    default -> System.out.println("Opção inválida!");
                 }
-
-                case 2 -> {
-                    System.out.print("Nome do produto: ");
-                    String nome = scanner.nextLine();
-
-                    System.out.print("Quantidade de entrada: ");
-                    int quantidade = scanner.nextInt();
-
-                    estoque.entradaEstoque(nome, quantidade);
-                }
-
-                case 3 -> {
-                    System.out.print("Nome do produto: ");
-                    String nome = scanner.nextLine();
-
-                    System.out.print("Quantidade de saída: ");
-                    int quantidade = scanner.nextInt();
-
-                    estoque.saidaEstoque(nome, quantidade);
-                }
-
-                case 4 -> estoque.listarProdutos();
-
-                case 0 -> System.out.println("Encerrando sistema...");
-
-                default -> System.out.println("Opção inválida!");
+            } catch (RuntimeException e) {
+                System.out.println("Erro: " + e.getMessage());
             }
 
         } while (opcao != 0);
