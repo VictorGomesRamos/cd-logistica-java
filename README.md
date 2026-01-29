@@ -1,31 +1,31 @@
-# CD Logística - Java
+# CD Logística – Controle de Estoque em Java
 
-Projeto desenvolvido em Java com o objetivo de praticar os fundamentos da programação e conceitos básicos de orientação a objetos, simulando o controle de produtos em um Centro de Distribuição (CD).
+Projeto desenvolvido em Java com foco em fundamentos de programação orientada a objetos,
+regras de negócio e versionamento com Git.
 
-## Funcionalidades atuais
+## Objetivo
+Simular o controle de estoque de um centro de distribuição (CD), permitindo:
 - Cadastro de produtos
-- Controle de quantidade em estoque
-- Exibição de informações no console
+- Entrada e saída de estoque
+- Validações de regras de negócio
+- Tratamento de exceções
 
 ## Tecnologias utilizadas
 - Java
-- IDE: IntelliJ IDEA
+- Programação Orientada a Objetos (POO)
+- Git e GitHub
 
-## Objetivo do projeto
-Projeto educacional criado para consolidar conhecimentos em:
-- Classes e objetos
-- Atributos
-- Estrutura condicional
-- Lógica de programação
+## Conceitos aplicados
+- Encapsulamento
+- Construtores
+- Getters e Setters
+- Validações de domínio
+- Tratamento de exceções (try/catch)
+- Organização em pacotes
+- Commits semânticos
 
-## Próximos passos
-- Criar métodos para entrada e saída de estoque
-- Organizar melhor as classes
-- Evoluir para uso de listas e menus interativos
-
----
-## Autor
-Victor Gomes Ramos
-
-Projeto em desenvolvimento 🚧
-
+## Exemplo de execução
+```java
+Produto produto = new Produto("Teclado", 10);
+produto.entradaEstoque(100);
+produto.saidaEstoque(3);
